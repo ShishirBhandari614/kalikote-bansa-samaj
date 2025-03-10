@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <head>
+        {% load static %}
+
+        <!-- Link to your static CSS file -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/addphoto.css' %}">
+    </head>
+    <body>
+
+        <div class="custom-form-container">
+            <h1>{{ title }}</h1>
+            <p>Welcome to my custom admin page!</p>
+
+            <form method="POST" enctype="multipart/form-data" id="addphoto-form">
+                {% csrf_token %}
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter name" required>
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Enter description" rows="4" required></textarea>
+
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+
+                <label for="datetime">Select Date & Time:</label>
+                <input type="datetime-local" id="datetime" name="datetime" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <script src='{% static "js/addphoto.js" %}'></script>
+    </body>
+        
+        
+{% endblock %}

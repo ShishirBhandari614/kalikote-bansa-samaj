@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - NDC</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .header {
+            background: #004685;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            text-align: center;
+            color: #004685;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .contact-details {
+            text-align: left;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 5px solid #004685;
+            margin-bottom: 20px;
+        }
+        .contact-details p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .contact-details i {
+            color: #004685;
+            margin-right: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #004685;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #003366;
+        }
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">KALIKOTE BANSHA SAMAJ - CONTACT US</div>
+    <div class="container">
+        <h2>Contact Information</h2>
+        <div class="contact-details">
+            <p><i class="fas fa-map-marker-alt"></i><strong> Address:</strong> Kalyannagar, Banasthali, Kathmandu-16, Nepal</p>
+            <p><i class="fas fa-phone"></i><strong> Phone:</strong> 9817864560, 9748391217</p>
+            <p><i class="fas fa-fax"></i><strong> Estd.:</strong> 2078 BS (2021 AD)</p>
+            <p><i class="fas fa-envelope"></i><strong> Email:</strong> sujankalikote14@gmail.com</p>
+        </div>
+        <h2>Get in Touch</h2>
+     
+{% comment %} 
+        {% if message %}
+            <div class="alert success">{{ message }}</div>
+        {% endif %}
+        
+        {% if errors %}
+            <div class="alert error">
+                <ul>
+                    {% for field, error_list in errors.items %}
+                        <li><strong>{{ field }}:</strong> {{ error_list|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %} {% endcomment %}
+
+        <form id="contact-form" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.524232982291!2d85.31731187547973!3d27.701729976163154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb191493bb5cb5%3A0x5e933eb3d3b9f7f1!2sKupondole%2C%20Lalitpur%2C%20Nepal!5e0!3m2!1sen!2snp!4v1647342482180!5m2!1sen!2snp" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <script src='{% static "js/contactform.js" %}'></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "admin/index.html" %}  {# Keep the default Django admin layout #}
+
+{% block content %}
+    {{ block.super }}  {# Keep the default admin content #}
+
+    <div class="module">
+        <h2>Custom Pages</h2>
+        <ul>
+            <li><a href="{% url 'add-photo' %}">📄 Add Photo</a></li>
+            <li><a href="{% url 'custom_form_list' %}">📄 photo list</a></li>
+            
+
+        </ul>
+    </div>
+{% endblock %}
