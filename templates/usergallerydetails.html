@@ -1,0 +1,24 @@
+{% include "base.html" %}
+
+{% block content %}
+{% load static %}
+
+
+<div class="container mt-4">
+    <div class="card">
+        <!-- Wrap the image with a link to open it in another tab -->
+        <a href="{{ form.image.url }}" target="_blank">
+            <img src="{{ form.image.url }}" class="card-img-top" alt="{{ form.name }}" style="object-fit: contain; width: 100%; height: 300px;">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{ form.name }}</h5>
+            <p class="card-text">{{ form.description }}</p>
+            <p class="text-muted">Uploaded on: {{ form.datetime }}</p>
+            
+            <a href="/photo-list/" class="btn btn-secondary">Back</a>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

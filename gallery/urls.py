@@ -5,9 +5,11 @@ app_name = 'gallery'
 
 
 urlpatterns = [
-    path('list/', custom_form_list, name='custom_form_list'),
-    path('detail/<int:pk>/', custom_form_detail, name='custom_form_detail'),
+    path('photo-list/', user_list_view, name='usercustom_form_list'),
+    path('photo-detail/<int:pk>/', user_detail_view, name='user_photo_details'),
+    path('video-list/', user_videolist_view, name='uservideo-list'),
+    path('base/', base, name='base'),
+    path('video-detail/<int:pk>/', user_videodetail_view, name='uservideo-detail'),
 ]
-
 
 

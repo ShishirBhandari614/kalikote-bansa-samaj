@@ -1,0 +1,39 @@
+
+
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ form.name }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            {% if form.video %}
+            <!-- Display video if available -->
+            <video width="100%" height="300px" controls>
+                <source src="{{ form.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            {% else %}
+            <!-- Display image if video is not available -->
+            <img src="{{ form.image.url }}" class="card-img-top" alt="{{ form.name }}" style="height: 300px; object-fit: cover;">
+            {% endif %}
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ form.name }}</h5>
+                <p class="card-text">{{ form.description }}</p>
+                <p class="text-muted">Uploaded on: {{ form.datetime }}</p>
+                <a href="{% url 'video-list' %}" class="btn btn-secondary">Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

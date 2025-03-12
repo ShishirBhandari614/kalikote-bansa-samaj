@@ -1,57 +1,87 @@
+/* Ensure the entire page has a sky-blue background */
+body, .content {
+    background: skyblue !important;
+    color: black !important;
+}
+
+/* Override Django admin form styles */
 .custom-form-container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    margin: 20px auto;
+    background: white !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    width: 350px !important;
+    margin: 50px auto !important;
+    position: relative !important;
+    z-index: 10 !important;
 }
 
+/* Style headings and labels for better visibility */
 h1 {
-    text-align: center;
-    color: #333;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
+    text-align: center !important;
+    color: #333 !important;
 }
 
 label {
-    font-weight: bold;
-    margin-top: 10px;
-    color: #555;
+    font-weight: bold !important;
+    margin-top: 10px !important;
+    color: #555 !important;
 }
 
+/* Input fields and textarea */
 input, textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+    width: 100% !important;
+    padding: 8px !important;
+    margin-top: 5px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+    font-size: 14px !important;
+    background: white !important;
+    color: black !important;
 }
 
-textarea {
-    resize: none;
+/* Fix datetime-local input visibility */
+input[type="datetime-local"] {
+    display: block !important;  /* Ensures visibility */
+    width: 100% !important;     /* Full width */
+    padding: 8px !important;    /* Proper padding */
+    font-size: 14px !important;
+    background: white !important;
+    color: black !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+    box-sizing: border-box !important;
 }
 
+/* Fix file input */
+input[type="file"] {
+    border: none !important;
+    padding: 5px !important;
+    background: white !important;
+    color: #0056b3 !important;
+}
+
+/* Style the submit button */
 button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 15px;
-    cursor: pointer;
-    font-size: 16px;
+    background-color: #007bff !important;
+    color: white !important;
+    padding: 10px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    margin-top: 15px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3 !important;
 }
 
-input[type="file"] {
-    border: none;
-    padding: 5px;
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    opacity: 1 !important;
+    display: block !important;
+    width: 20px;
+    height: 20px;
+    background: url('https://cdn-icons-png.flaticon.com/512/747/747310.png') no-repeat center;
+    background-size: contain;
 }

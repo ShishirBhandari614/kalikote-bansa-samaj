@@ -2,14 +2,31 @@ from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.template.response import TemplateResponse
-from.serializers import Photoserializer
+from.serializers import Photoserializer, videoserializer
 from django.http import JsonResponse
 from rest_framework import status
-from .models import CustomForm
+from .models import CustomForm,videoform
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
+class add_video(LoginRequiredMixin, APIView):
+    def get(self, request):
+        return TemplateResponse(request, 'addvideo.html', {})
 
-class add_photo(APIView):
+    def post(self, request):
+        print(request.data)
+        serializer = videoserializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # Return a JSON response indicating success
+            return JsonResponse({'message': 'photo added successfully!'}, status=status.HTTP_200_OK)
+        
+        # If there are errors, return them in a JSON response
+        return JsonResponse({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class add_photo(LoginRequiredMixin, APIView):
     def get(self, request):
         return TemplateResponse(request, 'addphoto.html', {})
 
@@ -24,20 +41,53 @@ class add_photo(APIView):
         # If there are errors, return them in a JSON response
         return JsonResponse({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-def custom_form_list(request):
+@login_required
+def admin_list_view(request):
     forms = CustomForm.objects.all().order_by('-datetime')  # Sorting by datetime
     return render(request, 'gallerylist.html', {'forms': forms})
 
-
-def custom_form_detail(request, pk):
+@login_required
+def admin_detail_view(request, pk):
     form = get_object_or_404(CustomForm, pk=pk)
     return render(request, 'gallerydetails.html', {'form': form})
 
 
 
-class editphoto(APIView):
+# def user_list_view(request):
+#     forms = CustomForm.objects.all().order_by('-datetime')  # Sorting by datetime
+#     base_template = "admin/base_site.html" if request.user.is_staff else "base.html"
+    
+#     return render(request, 'gallerylist.html', {'forms': forms, 'base_template': base_template})
+
+
+def user_list_view(request):
+    forms = CustomForm.objects.all().order_by('-datetime')  # Sorting by datetime
+    return render(request, 'usergallery.html', {'forms': forms})
+
+def user_detail_view(request, pk):
+    form = get_object_or_404(CustomForm, pk=pk)
+    return render(request, 'usergallerydetails.html', {'form': form})
+
+@login_required
+def admin_videolist_view(request):
+    forms = videoform.objects.all().order_by('-datetime')  # Sorting by datetime
+    return render(request, 'videolist.html', {'forms': forms})
+
+
+@login_required
+def admin_videodetail_view(request, pk):
+    form = get_object_or_404(videoform, pk=pk)
+    return render(request, 'videodetail.html', {'form': form})
+
+def user_videolist_view(request):
+    forms = videoform.objects.all().order_by('-datetime')  # Sorting by datetime
+    return render(request, 'uservideolist.html', {'forms': forms})
+
+def user_videodetail_view(request, pk):
+    form = get_object_or_404(videoform, pk=pk)
+    return render(request, 'uservideodetail.html', {'form': form})
+
+class editphoto(LoginRequiredMixin, APIView):
     def get(self, request, pk):
         form = get_object_or_404(CustomForm, pk=pk)
         context = {'form': form}
@@ -51,9 +101,36 @@ class editphoto(APIView):
             return JsonResponse({'message': 'Photo updated successfully!'}, status=status.HTTP_200_OK)
         return JsonResponse({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
         return render(request, "editphoto.html", context)
+    
+
+class editvideo(LoginRequiredMixin, APIView):
+    def get(self, request, pk):
+        form = get_object_or_404(videoform, pk=pk)
+        context = {'form': form}
+        return render(request, "editphoto.html", context)# Get the existing photo object
+
+    def post(self, request, pk): 
+        form = get_object_or_404(videoform, pk=pk)
+        serializer = Photoserializer(instance=form, data=request.data)  # Update existing data
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'message': 'Photo updated successfully!'}, status=status.HTTP_200_OK)
+        return JsonResponse({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return render(request, "editphoto.html", context)
+
        
-                
+@login_required                
 def delete_data(request, pk):
     query = CustomForm.objects.get(pk=pk)
     query.delete()
-    return redirect("/admin/list/")
+    return redirect("/admin/photo-list/")
+
+@login_required                
+def video_data(request, pk):
+    query = videoform.objects.get(pk=pk)
+    query.delete()
+    return redirect("/admin/video-list/")
+
+
+def base(request):
+    return render(request,"base.html")

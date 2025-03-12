@@ -1,13 +1,16 @@
 {% extends "admin/base_site.html" %}
 
+
 {% block content %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Forms</title>
+    
     {% comment %} <link rel="stylesheet" href="{% static 'css/gallery.css' %}"> {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
@@ -21,18 +24,24 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ form.name }}</h5>
                         <div class="d-flex justify-content-between">
-                            <a href="{% url 'custom_form_detail' form.id %}" class="btn btn-primary">View Details</a>
-                            <a href="{% url 'edit_photo' form.id %}" class="btn btn-warning">Edit</a>
-                            <a href="{% url 'delete_data' form.id %}" class="btn btn-danger">Delete</a>
+                            
+                            {% if user.is_staff %}  {# Check if user is admin/staff #}
+                                <a href="{% url 'custom_form_detail' form.id %}" class="btn btn-primary">View Details</a>
+                                <a href="{% url 'edit_photo' form.id %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'delete_data' form.id %}" class="btn btn-danger">Delete</a>
+                            {% else %} 
+                                <a href="/photo-detail/{{form.id}}" class="btn btn-danger">detail</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <p>No forms available.</p>
+            <p>No photo available.</p>
             {% endfor %}
         </div>
     </div>
 </body>
 </html>
 {% endblock %}
+

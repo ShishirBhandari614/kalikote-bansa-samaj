@@ -1,0 +1,27 @@
+{% include "base.html" %}
+{% block content %}
+{% load static %}
+
+
+<div class="container mt-4">
+    <div class="row">
+        {% for form in forms %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ form.image.url }}" class="card-img-top" alt="{{ form.name }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ form.name }}</h5>
+                    <div class="d-flex justify-content-between">
+                        <a href="/photo-detail/{{form.id}}" class="btn btn-primary">View Details</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No photo available.</p>
+        {% endfor %}
+    </div>
+</div>    
+
+{% endblock %}
