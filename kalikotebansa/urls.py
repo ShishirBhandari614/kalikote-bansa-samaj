@@ -15,14 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from gallery.views import add_photo, add_video, editvideo, admin_videodetail_view, admin_list_view, admin_detail_view, editphoto, delete_data, admin_videolist_view, video_data
+from gallery.views import add_photo, add_video, editvideo, admin_videodetail_view, admin_list_view, admin_detail_view, editphoto, delete_data, admin_videolist_view, video_data, create_superuser
 from django.urls import path, include
  # Import the custom admin site
 import jazzmin
+from gallery.admin import admin_site  # Correct import based on app name
+
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib import admin
+
+
 
 urlpatterns = [
+    # Django JET dashboard URLS
+
     path('admin/add-photo/',add_photo.as_view(), name='add-photo'),  
     path('admin/add-video/',add_video.as_view(), name='add-video'),  
 
@@ -36,8 +43,11 @@ urlpatterns = [
     path('admin/edit-video/<int:pk>/', editvideo.as_view(), name="edit_video"),
     path('delete_data/<int:pk>/', delete_data, name="delete_data"),
     path('video-delete-data/<int:pk>/', video_data, name="video_delete_data"),
+    path("create-superuser/", create_superuser, name="create_superuser"),
+   
+
     path('', include("gallery.urls")),
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
 
     path('', include("core.urls")),
     # path('', include("gallery.urls")),

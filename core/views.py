@@ -9,7 +9,6 @@ from django.http import JsonResponse
 from django.template.response import TemplateResponse
 # Create your views here.
 
-
 def home(request):
     return render(request,"frontpage.html")
 

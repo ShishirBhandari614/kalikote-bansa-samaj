@@ -31,13 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'material',
+    # 'material.admin',
+    'jazzmin',
+    # 'grappelli',
+    
+    # 'admin_interface',
+    # 'colorfield', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jazzmin',
+    
 ]
 EXTERNAL_APPS = [
     'core',
@@ -138,3 +145,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+JAZZMIN_SETTINGS = {
+    "show_themes": True,  # Allows theme switching
+    "site_url": "/",  # This restores the "View Site" button
+}
