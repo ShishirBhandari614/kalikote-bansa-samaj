@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f9f9f9, #f0f8ff);
+  }
+
+  .form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .form-container:hover {
+    transform: translateY(-5px);
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #0077b6;
+    padding-bottom: 10px;
+  }
+
+  form p {
+    margin-bottom: 18px;
+  }
+
+  label {
+    font-weight: 600;
+    color: #444;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="file"],
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #fafafa;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #0077b6;
+    background: #ffffff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,119,182,0.4);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #0077b6, #0096c7);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.2s;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #005f8a, #0077b6);
+    transform: translateY(-2px);
+  }
+</style>
+
+<div class="form-container">
+  <h2>Add Slide</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Slides{% endblock %}
+
+{% block content %}
+<style>
+/* Container */
+.slides-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Title */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.search-input {
+    width: 60%;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-input:focus {
+    border-color: #3498db;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background: #2980b9;
+}
+
+/* Grid Layout */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Card */
+.slide-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.slide-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image */
+.slide-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Caption */
+.slide-caption {
+    padding: 15px;
+    font-size: 15px;
+    color: #34495e;
+}
+
+/* Footer Buttons */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px 15px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-edit {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #e67e22;
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+/* Empty message */
+.no-slides {
+    text-align: center;
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-top: 40px;
+}
+</style>
+
+<div class="slides-container">
+    <h2 class="page-title">📸 Manage Slides</h2>
+
+    <!-- Search Bar -->
+    <form method="get" action="" class="search-bar">
+        <input type="text" name="q" class="search-input" placeholder="Search slides..." value="{{ request.GET.q }}">
+        <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <!-- Slide Cards -->
+    <div class="card-grid">
+        {% for slide in slides %}
+        <div class="slide-card">
+            {% if slide.image %}
+            <img src="{{ slide.image.url }}" alt="Slide image" class="slide-img">
+            {% endif %}
+            <div class="card-body">
+                <p class="slide-caption">{{ slide.caption|default:"No caption" }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'edit_slide' slide.id %}" class="btn btn-edit">✏️ Edit</a>
+                <a href="{% url 'delete_slide' slide.id %}" class="btn btn-delete">🗑️ Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="no-slides">No slides found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

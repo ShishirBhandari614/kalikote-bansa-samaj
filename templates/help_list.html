@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Help Form List{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1100px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+
+    <h2 style="text-align:center; margin-bottom: 30px; color: #333;">Help Form Submissions</h2>
+
+    <!-- Search Bar -->
+    <form method="get" action="" style="margin-bottom: 25px; text-align:center;">
+        <input type="text" name="q" placeholder="Search by name, address, or contact number..." 
+               value="{{ request.GET.q }}" 
+               style="width: 70%; padding: 10px 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;">
+        <button type="submit" 
+                style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer;">
+            Search
+        </button>
+    </form>
+
+    <!-- Help List Table -->
+    {% if page_help_forms %}
+    <div class="table-responsive">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead style="background: #007bff; color: white;">
+                <tr>
+                    <th style="padding: 12px;">Full Name</th>
+                    <th style="padding: 12px;">Address</th>
+                    <th style="padding: 12px;">Contact Number</th>
+                    <th style="padding: 12px;">Amount</th>
+                    <th style="padding: 12px;">Currency</th>
+                    <th style="padding: 12px;">Purpose</th>
+                    <th style="padding: 12px;">Voucher</th>
+                    <th style="padding: 12px;">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for form in page_help_forms %}
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 10px;">{{ form.full_name }}</td>
+                    <td style="padding: 10px;">{{ form.address }}</td>
+                    <td style="padding: 10px;">{{ form.contact_number }}</td>
+                    <td style="padding: 10px;">{{ form.amount }}</td>
+                    <td style="padding: 10px;">{{ form.currency }}</td>
+                    <td style="padding: 10px;">{{ form.donation_purpose|default:"—" }}</td>
+                    <td style="padding: 10px;">
+                        {% if form.voucher_image %}
+                            <a href="{{ form.voucher_image.url }}" target="_blank">
+                                <img src="{{ form.voucher_image.url }}" alt="Voucher" style="height: 60px; border-radius: 6px;">
+                            </a>
+                        {% else %}
+                            <span style="color: #999;">No Image</span>
+                        {% endif %}
+                    </td>
+                    <td style="padding: 10px;">{{ form.created_at|date:"Y-m-d" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p style="text-align:center; color: #666;">No help form submissions found.</p>
+    {% endif %}
+
+    <!-- Pagination -->
+    {% if page_help_forms.has_other_pages %}
+    <div style="margin-top: 25px; text-align: center;">
+        <ul style="list-style: none; display: inline-flex; padding: 0;">
+            {% if page_help_forms.has_previous %}
+            <li style="margin: 0 5px;">
+                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_help_forms.previous_page_number }}"
+                   style="padding: 8px 14px; background: #007bff; color: white; border-radius: 6px; text-decoration: none;">‹</a>
+            </li>
+            {% endif %}
+
+            {% for num in page_help_forms.paginator.page_range %}
+                {% if page_help_forms.number == num %}
+                    <li style="margin: 0 5px;">
+                        <span style="padding: 8px 14px; background: #0056b3; color: white; border-radius: 6px;">{{ num }}</span>
+                    </li>
+                {% elif num > page_help_forms.number|add:-3 and num < page_help_forms.number|add:3 %}
+                    <li style="margin: 0 5px;">
+                        <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ num }}"
+                           style="padding: 8px 14px; background: #f1f1f1; color: #333; border-radius: 6px; text-decoration: none;">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_help_forms.has_next %}
+            <li style="margin: 0 5px;">
+                <a href="?{% if request.GET.q %}q={{ request.GET.q }}&{% endif %}page={{ page_help_forms.next_page_number }}"
+                   style="padding: 8px 14px; background: #007bff; color: white; border-radius: 6px; text-decoration: none;">›</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

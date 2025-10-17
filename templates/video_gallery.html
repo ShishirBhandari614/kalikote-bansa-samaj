@@ -1,0 +1,117 @@
+{% extends 'baseuser.html' %}
+{% block title %}Manage Videos{% endblock %}
+{% block content %}
+<style>
+.manage-videos-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 32px 28px;
+}
+.video-search-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.video-search-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  background: #f8fafc;
+}
+.video-search-form button {
+  padding: 10px 24px;
+  border-radius: 8px;
+  background: #e11d48;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.video-search-form button:hover {
+  background: #be123c;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+.video-card {
+  background: #f8fafc;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 18px 12px 16px 12px;
+  text-align: center;
+}
+.video-card video {
+  max-width: 100%;
+  max-height: 180px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.video-card .video-title {
+  font-weight: 600;
+  color: #e11d48;
+  margin-bottom: 6px;
+}
+.video-card .video-desc {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.video-card .video-date {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.video-card .video-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.video-card .video-actions a {
+  padding: 7px 16px;
+  border-radius: 6px;
+  background: #e11d48;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+.video-card .video-actions a.delete {
+  background: #be123c;
+}
+.video-card .video-actions a:hover {
+  background: #be123c;
+}
+.video-card .video-actions a.delete:hover {
+  background: #7f1d1d;
+}
+</style>
+<div class="manage-videos-container">
+  <h2 style="text-align:center; color:#e11d48; margin-bottom:28px;">भिडियोहरू</h2>
+  <form method="get" class="video-search-form">
+    <input type="text" name="q" placeholder="नाम वा विवरण अनुसार खोज्नुहोस्" value="{{ request.GET.q|default:'' }}">
+    <button type="submit">Search</button>
+  </form>
+  <div class="video-grid">
+    {% for video in videos %}
+      <div class="video-card">
+        <video controls src="{{ video.video_file.url }}"></video>
+        <div class="video-title">{{ video.title }}</div>
+        <div class="video-desc">{{ video.description }}</div>
+        <div class="video-date">{{ video.date }}</div>
+        
+      </div>
+    {% empty %}
+      <p style="grid-column: 1/-1; text-align:center; color:#888;">No videos found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      {% if logo %}
+    
+        <a href="{% url 'dashboard' %}">
+          <img src="{{ logo.logo.url }}" alt="Logo" style="height:60px;">
+        </a>
+      {% endif %}
+      <ul class="nav-menu">
+       
+        <li><a href="{% url 'index' %}" target="_blank">Visit Site</a></li>
+       
+      
+      </ul>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="profile-dropdown">
+      <button class="profile-btn">Profile ▾</button>
+      <div class="profile-content">
+        <a href="{% url 'change_email' %}">Change Email</a>
+        <a href="{% url 'change_password' %}">Change Password</a>
+        <a href="{% url 'logout' %}">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul class="side-menu">
+      <li><a href="{% url 'change_logo' %}">Change Logo</a></li>
+      <li>
+        <a href="#" onclick="toggleSidebarSubMenu('photo-submenu'); return false;">Photo ▾</a>
+        <ul id="photo-submenu" class="sidebar-submenu" style="display:none;">
+          <li><a href="{% url 'add_photo' %}">Add Photo</a></li>
+          <li><a href="{% url 'manage_photo' %}">Manage Photo</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" onclick="toggleSidebarSubMenu('video-submenu'); return false;">Video ▾</a>
+        <ul id="video-submenu" class="sidebar-submenu" style="display:none;">
+          <li><a href="{% url 'add_video' %}">Add Video</a></li>
+          <li><a href="{% url 'manage_video' %}">Manage Video</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" onclick="toggleSidebarSubMenu('slide-submenu'); return false;">slide ▾</a>
+        <ul id="slide-submenu" class="sidebar-submenu" style="display:none;">
+          <li><a href="{% url 'add_slides' %}">Add Slide</a></li>
+          <li><a href="{% url 'manage_slide' %}">Manage Slide</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#" onclick="toggleSidebarSubMenu('member-submenu'); return false;">Member ▾</a>
+        <ul id="member-submenu" class="sidebar-submenu" style="display:none;">
+          <li><a href="{% url 'add_members' %}">Add Member</a></li>
+          <li><a href="{% url 'manage_members' %}">Manage Member</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'messages' %}">Messages</a></li>
+      <li><a href="{% url 'help_list' %}">Help List</a></li>
+      <li><a href="{% url 'notice_post' %}">Upload Notice</a></li>
+      {% comment %} <li><a href="{% url 'notice_list' %}">Notice List {% endcomment %}
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    {% if messages %}
+      <div class="flash-messages">
+        {% for message in messages %}
+          <div class="flash {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+    // Toggle profile dropdown on click
+    const profileBtn = document.querySelector('.profile-btn');
+    const profileContent = document.querySelector('.profile-content');
+
+    profileBtn.addEventListener('click', () => {
+      profileContent.classList.toggle('show');
+    });
+
+    // Close dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('.profile-btn')) {
+        if (profileContent.classList.contains('show')) {
+          profileContent.classList.remove('show');
+        }
+      }
+    }
+
+    // Sidebar submenu toggle
+    function toggleSidebarSubMenu(id) {
+      var submenu = document.getElementById(id);
+      submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Auto-hide flash messages after 3 seconds
+    setTimeout(function() {
+      var flashes = document.querySelectorAll('.flash');
+      flashes.forEach(function(el) {
+        el.style.transition = 'opacity 0.4s ease';
+        el.style.opacity = '0';
+        setTimeout(function(){ if (el && el.parentNode) el.parentNode.removeChild(el); }, 450);
+      });
+    }, 3000);
+  </script>
+  <style>
+    .flash-messages { margin: 12px 16px; }
+    .flash { padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; color: #0f172a; background: #e2e8f0; border: 1px solid #cbd5e1; }
+    .flash.success { background: #dcfce7; border-color: #bbf7d0; color: #14532d; }
+    .flash.error { background: #fee2e2; border-color: #fecaca; color: #7f1d1d; }
+    .flash.warning { background: #fef3c7; border-color: #fde68a; color: #78350f; }
+    .flash.info { background: #dbeafe; border-color: #bfdbfe; color: #1e3a8a; }
+  </style>
+</body>
+</html>

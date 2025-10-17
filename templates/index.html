@@ -1,0 +1,478 @@
+{% extends 'baseuser.html' %}
+{% block content %}
+{% load static %}
+  <main>
+   <!-- marquee-area start -->
+   <div class="pt-20">
+    <div class="container">
+     <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+       <div class="d-flex justify-content-between align-items-center gray-bg">
+        <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news">
+         <span class="d-flex align-items-center">
+          पछिल्ला अपडेटहरु
+         </span>
+        </div>
+        <marquee behavior="scroll" class="news-scroll" direction="left" onmouseout="this.start();" onmouseover="this.stop();">
+         <span class="dot">
+         </span>
+         <a href="/storage/listies/September2024/2081_baishakh_to_Ashar1.pdf" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+         <span class="dot">
+         </span>
+         <a href="/storage/listies/May2024/bises_arthik_subidha_jankari1.pdf" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+         <span class="dot">
+         </span>
+         <a href="/storage/listies/February2024/pratibha_dabali.jpg" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+         <span class="dot">
+         </span>
+         <a href="मिति २०८०/०९/०८" target="_blank">
+          घरभाडा लिने सूचना
+         </a>
+         <span class="dot">
+         </span>
+         <a href="/storage/listies/December2023/bigypti mugu2080 0011.jpg" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+         <span class="dot">
+         </span>
+         <a href="मिति २०८०/०६/०५" target="_blank">
+          प्रेस नोट
+         </a>
+         <span class="dot">
+         </span>
+         <a href="https://ndc.gov.np/pages/gallery/2080-02-03?lan=np" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+         <span class="dot">
+         </span>
+         <a href="pages/proactive-disclosures?lan=np&amp;id=186" target="_blank">
+          विश्वभरीका कालिकोटेहरु एक होऔ, आत्माको रक्षा, भ्रातृत्व, निर्भरता कालिकोटे वंशको एकता आजको आवश्यकता
+         </a>
+        </marquee>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <!-- marquee-area end -->
+   <!-- hero-area start -->
+<div class="container">
+  <div class="row">
+    <!-- Slider Column -->
+    <div class="col-xl-8 col-lg-8 col-md-8">
+      <div class="hero-slider">
+        <div class="slider-active">
+          {% for slide in slides %}
+          <div class="single-slider slider-height d-flex align-items-center" 
+               data-background="{{ slide.image.url }}">
+            <div class="caption-info">
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl-7 col-lg-8 col-md-10">
+                    <div class="hero-text">
+                      <div class="hero-slider-caption">
+                        <h4 data-animation="fadeInUp" data-delay=".4s">
+                          {{ slide.caption }}
+                        </h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Members Column -->
+    <div class="col-xl-4 col-lg-4 col-md-4">
+      <div class="row">
+        {% for member in members %}
+            {% if forloop.first %}
+            <div class="col-xl-12 col-lg-12 col-md-12">
+              <div class="text-center mb-20">
+                <div class="feature-small-icon">
+                  <img alt="{{ member.name }}" src="{{ member.image.url }}" width="90px"/>
+                </div>
+                <div class="feature-small-content">
+                  <h3>{{ member.name }}</h3>
+                  <h6>{{ member.position }}</h6>
+                  <p>मोबाइल: {{ member.phone }}</p>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="col-xl-12 col-lg-12 col-md-12">
+              <div class="text-center mb-20">
+                <div class="feature-small-icon">
+                  <img alt="{{ member.name }}" src="{{ member.image.url }}" width="90px"/>
+                </div>
+                <div class="feature-small-content">
+                  <h3>{{ member.name }}</h3>
+                  <h6>{{ member.position }}</h6>
+                  <p>मोबाइल: {{ member.phone }}</p>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        <!--MESSAGE FROM-->
+        <br/>
+        <section class="section-gap light-bg">
+         <div class="container">
+          <div class="row gy-4">
+            <div class="col-md-12 col-lg-7">
+             <div class="content-section">
+              <h3 class="mb-5">
+               पार्टीलाई नेतृत्वदायी–शक्ति बनाउने सङ्कल्प गरौं |
+              </h3>
+              <p>
+               <p style="text-align: justify;">
+                लोकतन्त्रमा दलहरू निश्चित वर्ग आधारमा खडा हुन्छन्, निश्चित दर्शन, सिद्धान्त र उद्देश्यमा सङ्गठित हुन्छन्। आफ्ना निश्चित पहिचान र मान्यतासहित क्रियाशील हुन्छन् । निर्वाचनमा सार्वभौम जनताले उनीहरूका उद्देश्य, कार्यक्रम र घोषणा
+                                हेरेर जनादेश दिन्छन् । सिद्धान्तहीन गठबन्धन निर्माण हुँदा र त्यही गठबन्धन निर्वाचनमा जाँदा जनताको स्वतन्त्र छनोटको अधिकार कुण्ठित हुन्छ । सङ्घीयताको खारेजी र प्रदेशहरूको वर्तमान सीमा परिवर्तन र सङ्ख्या बृद्धि जस्तो दुई
+                                विपरीत धारमा उभिएका दलहरूको यो गठबन्धनको आधार अवसरवाद...
+               </p>
+               <div class="mt-3">
+                <a class="btn theme-btn" href="https://www.cpnuml.org/president-message">
+                 <span>
+                  थप पढ्नुहोस्
+                 </span>
+                </a>
+               </div>
+              </p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </section>
+        </div>
+       </div>
+
+
+    
+   </section>
+  </main>
+
+  <section class="about-area about-area-mid pt-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-12 col-md-12">
+
+                <div class="bakix-details-tab">
+                    <ul class="nav pb-20 mb-20" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="cat27" data-toggle="tab" href="#crt27" role="tab"
+                                aria-controls="home" aria-selected="true">सूचनाहरु</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="cat26" data-toggle="tab" href="#crt26" role="tab"
+                                aria-controls="home" aria-selected="false">प्रेस विज्ञप्तिहरु</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="cat48" data-toggle="tab" href="#crt48" role="tab"
+                                aria-controls="home" aria-selected="false">स्वत: प्रकाशनहरु</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="cat47" data-toggle="tab" href="#crt47" role="tab"
+                                aria-controls="home" aria-selected="false">निर्देशिका</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="cat31" data-toggle="tab" href="#crt31" role="tab"
+                                aria-controls="home" aria-selected="false">कागजातहरु</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- सूचनाहरु -->
+                    <div class="tab-pane fade show active" id="crt27" role="tabpanel" aria-labelledby="cat27">
+                        <div class="event-text mb-40">
+                            <ul class="professinals-list">
+                                {% for notice in notices %}
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="{{ notice.file.url }}" target="_blank">{{ notice.name }}</a>
+                                    <div class="feeds-date">{{ notice.uploaded_at|date:"YYYY/MM/dd" }}</div>
+                                </li>
+                                {% empty %}
+                                <li>No notices available.</li>
+                                {% endfor %}
+                            </ul>
+                            <!-- Link to all notices page -->
+                            <div style="text-align: center; margin-top: 20px;">
+                                <a href="{% url 'notice_list' %}" 
+                                style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: #fff; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.3s;">
+                                    View All Notices
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- प्रेस विज्ञप्तिहरु -->
+                    <div class="tab-pane fade" id="crt26" role="tabpanel" aria-labelledby="cat26">
+                        <div class="event-text mb-40">
+                            <ul class="professinals-list">
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/February2025/final1.pdf" target="_blank">प्रेस नोट</a>
+                                    <div class="feeds-date">२०८१/११/०१</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/September2024/2081.06.091.jpg" target="_blank">प्रेस नोट</a>
+                                    <div class="feeds-date">2081/06/09</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/August2024/Image (46)1.jpg" target="_blank">विज्ञप्ति</a>
+                                    <div class="feeds-date">2081/04/29</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="मिति २०८०/०९/०८" target="_blank">घरभाडा लिने सूचना</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/December2023/bigypti mugu2080 0011.jpg" target="_blank">प्रेस विज्ञप्ति</a>
+                                    <div class="feeds-date">मिति २०८०/०९/०५</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="मिति २०८०/०६/०५" target="_blank">प्रेस नोट</a>
+                                    <div class="feeds-date">मिति २०८०/०६/०५</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/August2023/pess note 0011.jpg" target="_blank">प्रेश नोट</a>
+                                    <div class="feeds-date">मिति: २०८०/०४/२५</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/July2023/bigypti 0011.jpg" target="_blank">प्रेस विज्ञप्ति</a>
+                                    <div class="feeds-date">मिति: २०८०/०४/१४</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/July2023/jumla bigypti 0011.jpg" target="_blank">प्रेस विज्ञप्ति</a>
+                                    <div class="feeds-date">मिति: २०८०/०३/१९</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- स्वत: प्रकाशनहरु -->
+                    <div class="tab-pane fade" id="crt48" role="tabpanel" aria-labelledby="cat48">
+                        <div class="event-text mb-40">
+                            <ul class="professinals-list">
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/September2024/2081_baishakh_to_Ashar1.pdf" target="_blank">
+                                        सूचनाको हक सम्बन्धी ऐन,२०६४ ...
+                                    </a>
+                                    <div class="feeds-date">2081/06/06</div>
+                                </li>
+                                <!-- Other items here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- निर्देशिका -->
+                    <div class="tab-pane fade" id="crt47" role="tabpanel" aria-labelledby="cat47">
+                        <div class="event-text mb-40">
+                            <ul class="professinals-list">
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/June2022/anugaman_nirdesika_2078pdf.pdf" target="_blank">
+                                        राष्ट्रिय दलित आयोगको अनुगमन निर्देशिका, २०७८
+                                    </a>
+                                    <div class="feeds-date">आयोगबाट स्वीकृत मिति: २०७८/१२/२२ गते</div>
+                                </li>
+                                <!-- Other items here -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- कागजातहरु -->
+                    <div class="tab-pane fade" id="crt31" role="tabpanel" aria-labelledby="cat31">
+                        <div class="event-text mb-40">
+                            <ul class="professinals-list">
+                                <li>
+                                    <i class="fa fa-check"></i>
+                                    <a href="/storage/listies/August2023/godawari1.jpg" target="_blank">
+                                        राष्ट्रिय दलित आयोग रणनीतिक योजना ...
+                                    </a>
+                                    <div class="feeds-date">मिति २०८०/०४/२४</div>
+                                </li>
+                                <!-- Other items here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-xl-4 col-lg-12 col-md-12">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12"></div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <div class="ca-menu">
+                            <ul>
+                                <li class="btn-officialb">
+                                    <a href="/complaint?lan=np">
+                                        <span class="ca-icon"><i class="fa fa-keyboard"></i></span>
+                                        <div class="ca-content">
+                                            <h2 class="ca-main">अनलाइन उजूरी</h2>
+                                            <h3 class="ca-sub">अनलाइन मार्फत उजूरी गर्न</h3>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="btn-officialb">
+                                    <a href="/storage/listies/June2022/Anusuchi_News_2074.pdf?lan=np">
+                                        <span class="ca-icon"><i class="fa fa-file"></i></span>
+                                        <div class="ca-content">
+                                            <h2 class="ca-main">दलित जातीय अनुसूची विवरण</h2>
+                                            <h3 class="ca-sub">दलितवर्गमा सूचीकृत जात-जातिहरुको जातीय अनुसूची</h3>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="btn-officialb">
+                                    <a href="#?lan=np">
+                                        <span class="ca-icon"><i class="fa fa-list"></i></span>
+                                        <div class="ca-content">
+                                            <h2 class="ca-main">विज्ञ/विशेषज्ञको रोष्टर</h2>
+                                            <h3 class="ca-sub">आयोगको कार्यक्षेत्रसँग सम्बन्धित विषय क्षेत्रमा</h3>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- about-area end -->
+  <!-- cta-area start -->
+  <section class="news-letter-area pt-60 pb-60" data-background="{% static 'images/ndc-bg.jpg' %}" style="background-image: url('{% static 'images/ndc-bg.jpg' %}');">
+   <div class="container">
+    <div class="row">
+     <div class="col-xl-6 col-lg-8">
+      <div class="news-letter-box">
+       <div class="about-title news-letter-title mb-20">
+        <h1>
+         कालिकोटे बंश समाज
+        </h1>
+       </div>
+       <div class="news-letter-text mb-30">
+        <p style="text-align: justify;">
+         यस पृथ्वीमा मानव जातिको उत्पत्ति संगै जीवन शैली र हाम्रो मानव सभ्यताको विकास क्रमसँग जोडिएर श्री आत्रेय ऋषिमुनिको त्याग, तपस्या र निष्ठापूर्ण कर्मले आज हामी कालिकोटे थरका आत्रेय गोत्रीहरुको एक सभ्यताको खोजीमा लागेका छौं। हामीले विभिन्न माध्यमबाट वंशवलीको खोज र अनुसन्धान गरी वंशवली व्यवस्थापन गर्न संगठन गठन गरी नीतिगत रूपमा अगाडि बढी रहेका छौं।
+        </p>
+       </div>
+       <div class="button-area">
+        <a class="bt-btn" data-animation="fadeInLeft" data-delay=".6s" href="/pages/about-us?lan=np">
+         थप पढ्नुहोस्
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- cta-area end -->
+  <!-- pricing area start -->
+  <section class="pricing-area gray-bg pt-60 pb-60 bg-2">
+   <div class="container">
+    <div class="row justify-content-center">
+     <div class="col-xl-8 col-lg-10">
+      <div class="section-title text-center pos-rel mb-30">
+       <div class="section-text pos-rel">
+        <h1>
+         सोच, उद्देश्य तथा रणनीति
+        </h1>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="row mt-none-30 align-items-center no-gutters">
+     <div class="col-xl-4 col-lg-6 col-md-6 mt-30">
+      <div class="single-pricing-box">
+       <div class="pricing-head">
+        <h4 class="title">
+         सोच
+        </h4>
+       </div>
+       <div class="pricing-list mb-40">
+        <p>
+         दलित समुदायको मानव अधिकारको सम्मान तथा हकहितको संरक्षण र सम्वर्द्धनका लागी जातीय भेदभाव र छुवाछूतको अन्त्य गरी सम्वृद्ध, समतामूलक र सामाजिक न्यायपूर्ण समाज निर्माण गर्ने ।
+        </p>
+       </div>
+       <a class="bt-btn transparent" href="/pages/vision-objective-and-strategy?lan=np">
+        थप पढ्नुहोस्
+       </a>
+      </div>
+     </div>
+     <div class="col-xl-4 col-lg-6 col-md-6 mt-30">
+      <div class="single-pricing-box active bg_img" data-overlay="94">
+       <div class="pricing-head">
+        <h4 class="title">
+         उद्देश्य
+        </h4>
+       </div>
+       <div class="pricing-list mb-40">
+        <p>
+         आर्थिक, सामाजिक तथा राजनैतिक अवसरबाट बञ्चितिमा परेका दलितहरुका लागि मुलुकमा उपलब्ध साधन स्रोत तथा सुविधामा समानुपातिक समावेशी पँहुचको सुनिश्चितता गर्ने,
+        </p>
+        <p>
+         दलित समुदायको मानवअधिकारको संरक्षण तथा प्रर्वद्धन गर्ने,
+        </p>
+        <p>
+         विभेद तथा छुवाछूत अन्तय गरी राष्ट्र निर्माण तथा विकासमा मूलप्रवाहीकरण गर्ने ।
+        </p>
+       </div>
+       <a class="bt-btn transparent" href="/pages/vision-objective-and-strategy?lan=np">
+        थप पढ्नुहोस्
+       </a>
+      </div>
+     </div>
+     <div class="col-xl-4 col-lg-6 col-md-6 mt-30">
+      <div class="single-pricing-box">
+       <div class="pricing-head">
+        <h4 class="title">
+         रणनीति
+        </h4>
+       </div>
+       <div class="pricing-list mb-40">
+        <p>
+         मुलुकको उपलब्ध स्रोत साधानहरुमा दलित वर्गको समानुपातिक पँहुच बढाउने, राज्यका तिनै तहमा हुने निर्णय प्रक्रिया तथा यसका प्रशासनिक संरचनामा सकारात्मक विभेद र आरक्षणको माध्यमबाट दलित समुदायको प्रभावकारी भूमिका र...
+        </p>
+       </div>
+       <a class="bt-btn transparent" href="/pages/vision-objective-and-strategy?lan=np">
+        थप पढ्नुहोस्
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- pricing area end -->
+{% endblock %}

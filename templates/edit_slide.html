@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %}Edit Video{% endblock %}
+{% block content %}
+<style>
+.upload-form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 32px 28px;
+}
+.upload-form-container h2 {
+  text-align: center;
+  color: #e11d48;
+  margin-bottom: 28px;
+  font-weight: 700;
+}
+.upload-form-container form div {
+  margin-bottom: 18px;
+}
+.upload-form-container label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+.upload-form-container input[type="text"],
+.upload-form-container input[type="file"],
+.upload-form-container textarea,
+.upload-form-container input[type="date"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  transition: border 0.3s;
+  background: #f8fafc;
+}
+.upload-form-container input:focus,
+.upload-form-container textarea:focus {
+  border-color: #e11d48;
+  outline: none;
+}
+.upload-form-container .submit-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #e11d48, #be123c);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(225,29,72,0.12);
+  transition: background 0.3s;
+}
+.upload-form-container .submit-button:hover {
+  background: linear-gradient(90deg, #be123c, #e11d48);
+}
+.upload-form-container .errors {
+  color: #e11d48;
+  margin-bottom: 12px;
+  font-size: 14px;
+  text-align: center;
+}
+.preview {
+  margin: 14px auto 0;
+}
+.preview img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+
+.cancel-link {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+.cancel-link:hover {
+  color: #e11d48;
+}
+
+</style>
+
+<div class="upload-form-container">
+  <h2>Edit Slide</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+      <div class="errors">{{ form.non_field_errors }}</div>
+    {% endif %}
+      <div>
+        {{ form.image.label_tag }}
+        {{ form.image }}
+      </div>
+
+
+    <div>
+      {{ form.caption.label_tag }}
+      {{ form.caption }}
+    </div> 
+    
+    <button type="submit" class="submit-button">Save Changes</button>
+    <a href="{% url 'manage_slide' %}" class="cancel-link">Cancel</a>
+  </form>
+  <div class="preview">
+    <p>Current slide:</p>
+    <img src="{{ slide.image.url }}" alt="{{ slide.caption }}">
+  </div>
+</div>
+{% endblock %}
+
+
