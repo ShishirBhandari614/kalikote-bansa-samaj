@@ -514,7 +514,7 @@ $.scrollUp({
 
 // nice-slector
 	$(document).ready(function () {
-		$('select').niceSelect();
+		$('select:not(.js-cascade-select)').niceSelect();
 	});
 
 // WOW active

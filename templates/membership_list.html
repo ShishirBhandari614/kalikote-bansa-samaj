@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/membership_list.css' %}">
+
+<div class="container">
+    <h2>Membership Applications</h2>
+
+    <table class="membership-table">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Voucher</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for app in page_obj %}
+            <tr onclick="window.location='{% url 'membership_detail' app.id %}'" class="clickable-row">
+                <td>
+                    <img src="{{ app.passport_photo.url }}" class="thumb">
+                </td>
+                <td>
+                    {{ app.first_name }} {{ app.last_name }}
+                </td>
+                <td>{{ app.email }}</td>
+                <td>
+                    <img src="{{ app.payment_screenshot.url }}" class="thumb">
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No applications found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

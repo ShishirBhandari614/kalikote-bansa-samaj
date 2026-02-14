@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .form import RoleLoginForm, AddPhotoForm, AddVideoForm, ChangeLogoForm, MemberForm, SlideForm
 from .models import User, Logo,Photo, Video, Slide, Members
+from gallery.models import MembershipApplication
 from .permissions import superadmin_required, admin_required 
 from django.db import models  
 from django.contrib import messages
@@ -419,3 +420,22 @@ def search_slides(request):
         slides = Slide.objects.all()
     return render(request, 'manage_slides.html', {'slides': slides})
 
+def membership_list(request):
+    # Order by newest first
+    applications = MembershipApplication.objects.order_by('-id')  
+    # or if you have a created_at field:
+    # applications = MembershipApplication.objects.order_by('-created_at')
+
+    paginator = Paginator(applications, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'membership_list.html', {
+        'page_obj': page_obj
+    })
+
+def membership_detail(request, pk):
+    application = get_object_or_404(MembershipApplication, pk=pk)
+    return render(request, 'membership_detail.html', {
+        'application': application
+    })

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/membership_detail.css' %}">
+
+<div class="detail-container">
+
+    <!-- Dynamic Page Title -->
+    <h2 class="page-title">
+        {{ application.first_name }}
+        {{ application.middle_name }}
+        {{ application.last_name }}
+    </h2>
+
+    <div class="detail-card">
+
+        <div class="profile-section">
+
+            <!-- Clickable Image -->
+            <img src="{{ application.passport_photo.url }}" 
+                 class="large-photo clickable"
+                 onclick="openModal(this.src)">
+
+            <p class="email">{{ application.email }}</p>
+        </div>
+
+        <div class="info-grid">
+            <div><strong>DOB:</strong> {{ application.dob }}</div>
+            <div><strong>Mobile:</strong> {{ application.mobile }}</div>
+            <div><strong>National ID Number:</strong> {{ application.national_id_type }}</div>
+            <div><strong>Citizenship Number:</strong> {{ application.national_id_number }}</div>
+            <div><strong>Address:</strong> {{ application.temporary_address }}</div>
+            <div><strong>Mother Tongue:</strong> {{ application.mother_tongue }}</div>
+            <div><strong>Caste:</strong> {{ application.caste }}</div>
+            <div><strong>Pradesh:</strong> {{ application.pradesh }}</div>
+            <div><strong>District:</strong> {{ application.district }}</div>
+            <div><strong>Local Body:</strong> {{ application.local_body_type }}</div>
+            <div><strong>Ward:</strong> {{ application.ward_number }}</div>
+        </div>
+
+        <div class="documents-section">
+            <div class="doc-card">
+                <h4>Citizenship Front</h4>
+                <img src="{{ application.citizenship_front.url }}" 
+                     class="doc-img clickable"
+                     onclick="openModal(this.src)">
+            </div>
+
+            <div class="doc-card">
+                <h4>Citizenship Back</h4>
+                <img src="{{ application.citizenship_back.url }}" 
+                     class="doc-img clickable"
+                     onclick="openModal(this.src)">
+            </div>
+
+            <div class="doc-card">
+                <h4>Payment Voucher</h4>
+                <img src="{{ application.payment_screenshot.url }}" 
+                     class="doc-img clickable"
+                     onclick="openModal(this.src)">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <img id="modalImage" class="modal-content">
+</div>
+
+<script>
+function openModal(src) {
+    document.getElementById("modalImage").src = src;
+    document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+</script>
+
+{% endblock %}

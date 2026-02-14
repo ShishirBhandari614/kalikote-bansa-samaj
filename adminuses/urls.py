@@ -26,4 +26,6 @@ urlpatterns = [
     path('manage_members/', manage_members, name='manage_members'),
     path('delete_member/<int:member_id>/', delete_member, name='delete_member'),
     path('edit_member/<int:member_id>/', edit_member, name='edit_member'),
+    path('membership-list/', membership_list, name='membership_list'),
+    path('membership/<int:pk>/', membership_detail, name='membership_detail'),
 ]

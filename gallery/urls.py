@@ -15,4 +15,5 @@ urlpatterns = [
    path('help_list', help_list, name='help_list'),
    path ('notice_post/', notice_post, name='notice_post'),
    path('notice_list/', notice_list, name='notice_list'),
+   path('membership-form/', membership_form, name='membership_form'),
 ]
