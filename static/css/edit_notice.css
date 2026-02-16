@@ -1,0 +1,81 @@
+/* Page Container */
+.edit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* Card */
+.edit-card {
+    background: #ffffff;
+    padding: 35px;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.edit-title {
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Form Fields */
+.edit-form p {
+    margin-bottom: 18px;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+    border-color: #34495e;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 73, 94, 0.2);
+}
+
+/* Update Button */
+.update-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #34495e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #2c3e50;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #34495e;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    color: #2c3e50;
+}

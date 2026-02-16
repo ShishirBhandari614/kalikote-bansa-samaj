@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/manage_notice.css' %}">
+<div class="manage-container">
+    <h2 class="page-title">Manage Notices</h2>
+
+    <div class="table-wrapper">
+        <table class="notice-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>File</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for notice in notices %}
+                <tr>
+                    <td>{{ notice.name }}</td>
+                    <td>
+                        {% if notice.file %}
+                            <a href="{{ notice.file.url }}" target="_blank" class="view-btn">View</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_notice' notice.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'delete_notice' notice.id %}" class="delete-btn">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="empty-row">No notices available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="pagination-container">
+    {% if notices.has_previous %}
+        <a href="?page=1" class="page-btn">First</a>
+        <a href="?page={{ notices.previous_page_number }}" class="page-btn">Previous</a>
+    {% endif %}
+
+    <span class="current-page">
+        Page {{ notices.number }} of {{ notices.paginator.num_pages }}
+    </span>
+
+    {% if notices.has_next %}
+        <a href="?page={{ notices.next_page_number }}" class="page-btn">Next</a>
+        <a href="?page={{ notices.paginator.num_pages }}" class="page-btn">Last</a>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

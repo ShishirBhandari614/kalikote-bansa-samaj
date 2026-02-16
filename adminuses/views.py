@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
-from .form import RoleLoginForm, AddPhotoForm, AddVideoForm, ChangeLogoForm, MemberForm, SlideForm
+from .form import RoleLoginForm, AddPhotoForm, AddVideoForm, ChangeLogoForm, MemberForm, SlideForm, DocumentForm
 from .models import User, Logo,Photo, Video, Slide, Members
-from gallery.models import MembershipApplication
+from gallery.models import MembershipApplication, Notices
 from .permissions import superadmin_required, admin_required 
 from django.db import models  
 from django.contrib import messages
@@ -438,4 +438,55 @@ def membership_detail(request, pk):
     application = get_object_or_404(MembershipApplication, pk=pk)
     return render(request, 'membership_detail.html', {
         'application': application
+    })
+
+
+def notice_post(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Notice uploaded successfully.")
+            return redirect('notice_post')  # Redirect after saving
+    else:
+        form = DocumentForm()
+    return render(request, 'notice_post.html', {'form': form})
+
+def manage_notices(request):
+    notice_list = Notices.objects.all().order_by('-id')
+
+    paginator = Paginator(notice_list, 5)  # 5 notices per page
+    page_number = request.GET.get('page')
+    notices = paginator.get_page(page_number)
+
+    return render(request, 'manage_notice.html', {'notices': notices})
+    
+
+def update_notice(request, notice_id):
+    notice = get_object_or_404(Notices, id=notice_id)
+
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES, instance=notice)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Notice updated successfully.")
+            return redirect('manage_notices')
+    else:
+        form = DocumentForm(instance=notice)
+
+    return render(request, 'edit_notice.html', {'form': form, 'notice': notice})
+
+
+def delete_notice(request, notice_id):
+    notice = get_object_or_404(Notices, id=notice_id)
+
+    if request.method == 'POST':
+        notice.delete()
+        messages.success(request, "Notice deleted successfully.")
+        return redirect('manage_notices')
+
+    return render(request, 'confirm_delete.html', {
+        'object': notice,
+        'type': 'notice',
+        'cancel_url_name': 'manage_notices'
     })

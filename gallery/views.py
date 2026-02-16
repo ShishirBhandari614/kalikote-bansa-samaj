@@ -4,7 +4,7 @@ from django.contrib import messages
 from adminuses.models import Photo, Video
 from django.db import models
 from .models import Contact, Help_form, Notices, MembershipApplication
-from .form import DocumentForm
+
 from django.core.paginator import Paginator
 
 
@@ -120,17 +120,6 @@ def help_list(request):
 
     return render(request, 'help_list.html', {'page_help_forms': page_obj})
 
-
-def notice_post(request):
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Notice uploaded successfully.")
-            return redirect('notice_post')  # Redirect after saving
-    else:
-        form = DocumentForm()
-    return render(request, 'notice_post.html', {'form': form})
 
 def notice_list(request):
     if request.user.is_authenticated:

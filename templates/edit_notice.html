@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/edit_notice.css' %}">
+<div class="edit-container">
+    <div class="edit-card">
+        <h2 class="edit-title">Edit Notice</h2>
+
+        <form method="POST" enctype="multipart/form-data" class="edit-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="update-btn">Update</button>
+        </form>
+
+        <a href="{% url 'manage_notices' %}" class="back-btn">Back</a>
+    </div>
+</div>
+
+{% endblock %}

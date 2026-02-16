@@ -1,5 +1,6 @@
 from django import forms
 from .models import Members, Slide
+from gallery.models import Notices
 
 
 class RoleLoginForm(forms.Form):
@@ -89,4 +90,18 @@ class SlideForm(forms.ModelForm):
         labels = {
             'image': 'Upload Image',
             'caption': 'Enter Caption',
+        }
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Notices
+        fields = ['name', 'file']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Enter Notice Name'}),
+            'file': forms.FileInput(attrs={'placeholder': 'Upload Notice File'}),
+        }
+        labels = {
+            'name': 'Notice Name',
+            'file': 'Upload Notice File',
         }

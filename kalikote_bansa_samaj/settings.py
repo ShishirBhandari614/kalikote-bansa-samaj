@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'index',  # Ensure 'index' app is included
     'adminuses',  # Ensure 'adminuses' app is included
-    'languagetrans',
+    # 'languagetrans',
     'gallery',  # Ensure 'gallery' app is included
     
 ]

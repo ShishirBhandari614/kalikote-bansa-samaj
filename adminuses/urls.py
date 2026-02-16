@@ -28,4 +28,8 @@ urlpatterns = [
     path('edit_member/<int:member_id>/', edit_member, name='edit_member'),
     path('membership-list/', membership_list, name='membership_list'),
     path('membership/<int:pk>/', membership_detail, name='membership_detail'),
+    path ('notice_post/', notice_post, name='notice_post'),
+    path('manage_notices/', manage_notices, name='manage_notices'),
+    path('edit_notice/<int:notice_id>/', update_notice, name='edit_notice'),
+    path('delete_notice/<int:notice_id>/', delete_notice, name='delete_notice'),
 ]

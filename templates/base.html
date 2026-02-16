@@ -68,9 +68,16 @@
           <li><a href="{% url 'manage_members' %}">Manage Member</a></li>
         </ul>
       </li>
+      <li>
+        <a href="#" onclick="toggleSidebarSubMenu('notice-submenu'); return false;">Notice ▾</a>
+        <ul id="notice-submenu" class="sidebar-submenu" style="display:none;">
+          <li><a href="{% url 'notice_post' %}">Add Notice</a></li>
+          <li><a href="{% url 'manage_notices' %}">Manage Notice</a></li>
+        </ul>
+      </li>
       <li><a href="{% url 'messages' %}">Messages</a></li>
       <li><a href="{% url 'help_list' %}">Help List</a></li>
-      <li><a href="{% url 'notice_post' %}">Upload Notice</a></li>
+      
       <li><a href="{% url 'membership_list' %}">Membership List</a></li>
       {% comment %} <li><a href="{% url 'notice_list' %}">Notice List {% endcomment %}
     </ul>
