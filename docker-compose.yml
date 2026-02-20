@@ -1,0 +1,28 @@
+name: kalikote_bansa_samaj
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: docker-image
+    container_name: kalikote-bansa
+    ports:
+    - "8000:8000"
+    volumes:
+    - .:/app
+    depends_on:
+    - db
+
+  db:
+    image: postgres:17
+    container_name: kalikote-bansa-db
+    restart: always
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=kalikote_bansa_samaj
+
+    ports:
+    - "5433:5432"
+    
