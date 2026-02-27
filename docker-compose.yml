@@ -1,28 +1,35 @@
-name: kalikote_bansa_samaj
-
 services:
-  app:
+  api:
     build:
-      context: .
-      dockerfile: dockerfile
-    image: docker-image
-    container_name: kalikote-bansa
-    ports:
-    - "8000:8000"
+      context: src
+      dockerfile: docker/dockerfile
+    # command: uvicorn config.asgi:application --workers 1 --host 0.0.0.0 --port 8000 --reload --reload-include *.html
     volumes:
-    - .:/app
+      - ./src/:/app
+    ports:
+      - 8000:8000
     depends_on:
-    - db
+      - db
+    environment:
+      - TZ=Asia/Kathmandu
+      - PYTHONUNBUFFERED=1
+      - DEBUG=1
+      - SERVER_TYPE=LOCAL
+      - DJANGO_SETTINGS_MODULE=kalikote_bansa_samaj.settings
+    env_file:
+      - ./src/kalikote_bansa_samaj/.env
+    container_name: kalikote_backend
 
   db:
-    image: postgres:17
-    container_name: kalikote-bansa-db
-    restart: always
+    container_name: kalikote_db
+    image: postgis/postgis:14-3.3
     environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=postgres
-    - POSTGRES_DB=kalikote_bansa_samaj
+      - POSTGRES_USER=kalikoteadmin
+      - POSTGRES_PASSWORD=Admin@1234
+      - POSTGRES_DB=kalikotedb
 
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
     ports:
-    - "5433:5432"
+      - 5433:5432
     
