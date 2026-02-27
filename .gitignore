@@ -1,3 +1,4 @@
 dockerfile
 .dockerignore
 .vscode/
+postegres_data
